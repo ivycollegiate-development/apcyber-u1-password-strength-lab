@@ -1,0 +1,41 @@
+name: grade
+
+on: [push, workflow_dispatch]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Hash file integrity
+        run: python3 crack.py --selftest
+
+      - name: README results table complete
+        run: |
+          python3 - <<'PY'
+          import re, sys
+          md = open("README.md").read()
+          rows = re.findall(r"^\|\s*(\d+)\s*\|", md, re.M)
+          if len(rows) < 8:
+              print(f"FAIL: expected 8 numbered result rows, found {len(rows)}")
+              sys.exit(1)
+          answered = 0
+          for line in md.splitlines():
+              m = re.match(r"^\|\s*\d+\s*\|", line)
+              if not m:
+                  continue
+              cells = [c.strip() for c in line.strip().strip("|").split("|")]
+              # cells: [#][algo][cracked?][password][stage][time]
+              if len(cells) >= 3 and cells[2].lower() in ("yes", "no"):
+                  answered += 1
+          print(f"answered rows (yes/no filled): {answered}/8")
+          if answered < 8:
+              print("FAIL: fill in the Cracked? column (yes/no) for all 8 rows")
+              sys.exit(1)
+          print("PASS: results table complete")
+          PY
