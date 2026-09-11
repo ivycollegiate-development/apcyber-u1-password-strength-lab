@@ -79,14 +79,14 @@ what you will fill in:
 
 | # | Algorithm | Cracked? (yes/no) | Password (if cracked) | Crack stage | Time (s) |
 |---|-----------|-------------------|-----------------------|-------------|----------|
-| 1 | MD5       |                   |                       |             |          |
-| 2 | MD5       |                   |                       |             |          |
-| 3 | SHA-1     |                   |                       |             |          |
-| 4 | SHA-1     |                   |                       |             |          |
-| 5 | SHA-256   |                   |                       |             |          |
-| 6 | SHA-256   |                   |                       |             |          |
-| 7 | SHA-1     |                   |                       |             |          |
-| 8 | SHA-256   |                   |                       |             |          |
+| 1 | MD5       |CRACKED            |123456                 |0.000        |          |
+| 2 | MD5       |CRACKED            |password               |0.000        |          |
+| 3 | SHA-1     |CRACKED            |letmein                |0.000        |          |
+| 4 | SHA-1     |CRACKED            |summer2026             |0.021        |          |
+| 5 | SHA-256   |CRACKED            |Dragon$Fly             |             |0.040     |
+| 6 | SHA-256   |CRACKED            |F00tb4ll&3             |             |0.017     |
+| 7 | SHA-1     |CRACKED            |correct-horse-battery-staple|0.066   |          |
+| 8 | SHA-256   |NOT CRACKED        |                       |             |          |
 
 For example, a completed row for a password that fell to the dictionary attack
 would read:
